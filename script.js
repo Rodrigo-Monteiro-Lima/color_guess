@@ -31,7 +31,9 @@ function addClass(event) {
   ball4.classList.remove('chosen');
   ball5.classList.remove('chosen');
   ball6.classList.remove('chosen');
-  event.target.classList.add('chosen');
+  if (count < 1) {
+    event.target.classList.add('chosen');
+  }
 }
 ball1.addEventListener('click', addClass);
 ball2.addEventListener('click', addClass);
@@ -48,13 +50,14 @@ window,onload = function initial() {
 }
 
 let colorsOptions = document.querySelector('#colors');
+let count = 0
 colorsOptions.addEventListener('click', (event) => {
   let guessedValue = 'rgb' + document.querySelector('#rgb-color').innerHTML;
   if (event.target.className.includes('ball')) {
     if (event.target.className.includes('chosen')) {
-      if (guessedValue === event.target.style.backgroundColor) {
+      if (guessedValue === event.target.style.backgroundColor && count < 1) {
         text.innerHTML = 'Acertou!'
-      } else if (guessedValue !== event.target.style.backgroundColor) {
+      } else if (guessedValue !== event.target.style.backgroundColor && count < 1) {
         text.innerHTML = 'Errou! Tente novamente!'
       }       
     }
@@ -80,16 +83,18 @@ btnReset.addEventListener('click', () => {
   ball4.classList.remove('chosen');
   ball5.classList.remove('chosen');
   ball6.classList.remove('chosen');
+  count = 0;
 })
 
 let score = document.querySelector('#score');
 score.innerHTML = 0;
 function addScore() {
-  if (text.innerHTML === 'Acertou!') {
+  if (text.innerHTML === 'Acertou!' && count < 1) {
     score.innerHTML = parseInt(score.innerHTML) + 3;
-  } else if (parseInt(score.innerHTML) > 0){
+  } else if (parseInt(score.innerHTML) > 0 && count < 1){
     score.innerHTML = parseInt(score.innerHTML) - 1;
   }
+  count += 1;
 }
 
 console.log();

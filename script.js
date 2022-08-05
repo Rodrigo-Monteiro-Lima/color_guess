@@ -1,29 +1,27 @@
-let guessColor = document.querySelector('#rgb-color');
-let options = document.querySelectorAll('.ball');
-let text = document.querySelector('#answer');
+const guessColor = document.querySelector('#rgb-color');
+const options = document.querySelectorAll('.ball');
+const text = document.querySelector('#answer');
+let count = 0;
 
 function generateOptionsColor() {
   for (let index = 0; index < options.length; index += 1) {
     options[index].style.backgroundColor = `rgb(${Math.random()
-      * 255},${Math.random() * 255},${Math.random() * 255})`;    
+      * 255},${Math.random() * 255},${Math.random() * 255})`;
   }
-  options[parseInt(Math.random() * 5)].style.backgroundColor = 'rgb' + guessColor.innerHTML;
+  options[parseInt(Math.random() * 5, 10)].style.backgroundColor = `rgb${guessColor.innerHTML}`;
 }
 
-//function colorToBeGuessed() {
-  let red = parseInt(Math.random() * 255);
-  let green = parseInt(Math.random() * 255);
-  let blue = parseInt(Math.random() * 255);
+let red = parseInt(Math.random() * 255, 10);
+let green = parseInt(Math.random() * 255, 10);
+let blue = parseInt(Math.random() * 255, 10);
+guessColor.innerHTML = `(${red}, ${green}, ${blue})`;
 
-  guessColor.innerHTML = `(${red}, ${green}, ${blue})`;
-//}
-
-let ball1 = document.querySelector('#first');
-let ball2 = document.querySelector('#second');
-let ball3 = document.querySelector('#third');
-let ball4 = document.querySelector('#fourth');
-let ball5 = document.querySelector('#fifth');
-let ball6 = document.querySelector('#sixth');
+const ball1 = document.querySelector('#first');
+const ball2 = document.querySelector('#second');
+const ball3 = document.querySelector('#third');
+const ball4 = document.querySelector('#fourth');
+const ball5 = document.querySelector('#fifth');
+const ball6 = document.querySelector('#sixth');
 function addClass(event) {
   ball1.classList.remove('chosen');
   ball2.classList.remove('chosen');
@@ -40,41 +38,49 @@ ball2.addEventListener('click', addClass);
 ball3.addEventListener('click', addClass);
 ball4.addEventListener('click', addClass);
 ball5.addEventListener('click', addClass);
-ball6.addEventListener('click', addClass)
+ball6.addEventListener('click', addClass);
 
-
-window,onload = function initial() {
-  //colorToBeGuessed();
+window.onload = function initial() {
   generateOptionsColor();
   text.innerHTML = 'Escolha uma cor';
+};
+
+const score = document.querySelector('#score');
+score.innerHTML = 0;
+function addScore() {
+  if (text.innerHTML === 'Acertou!' && count < 1) {
+    score.innerHTML = parseInt(score.innerHTML, 10) + 3;
+  } else if (parseInt(score.innerHTML, 10) > 0 && count < 1) {
+    score.innerHTML = parseInt(score.innerHTML, 10) - 1;
+  }
+  count += 1;
 }
 
-let colorsOptions = document.querySelector('#colors');
-let count = 0
+function reWrite(event) {
+  const guessedValue = `rgb${document.querySelector('#rgb-color').innerHTML}`;
+  if (guessedValue === event.target.style.backgroundColor && count < 1) {
+    text.innerHTML = 'Acertou!';
+  } else if (guessedValue !== event.target.style.backgroundColor && count < 1) {
+    text.innerHTML = 'Errou! Tente novamente!';
+  }
+}
+const colorsOptions = document.querySelector('#colors');
 colorsOptions.addEventListener('click', (event) => {
-  let guessedValue = 'rgb' + document.querySelector('#rgb-color').innerHTML;
-  if (event.target.className.includes('ball')) {
-    if (event.target.className.includes('chosen')) {
-      if (guessedValue === event.target.style.backgroundColor && count < 1) {
-        text.innerHTML = 'Acertou!'
-      } else if (guessedValue !== event.target.style.backgroundColor && count < 1) {
-        text.innerHTML = 'Errou! Tente novamente!'
-      }       
-    }
+  if (event.target.className.includes('ball chosen')) {
+    reWrite(event);
   }
   addScore();
-  console.log(event.target.style.backgroundColor);
-})
+});
 
-let btnReset = document.createElement('button');
-btnReset.id = 'reset-game'
-btnReset.innerHTML = 'Resetar o jogo'
+const btnReset = document.createElement('button');
+btnReset.id = 'reset-game';
+btnReset.innerHTML = 'Resetar o jogo';
 document.body.appendChild(btnReset);
 btnReset.addEventListener('click', () => {
   text.innerHTML = 'Escolha uma cor';
-  let red = parseInt(Math.random() * 255);
-  let green = parseInt(Math.random() * 255);
-  let blue = parseInt(Math.random() * 255);
+  red = parseInt(Math.random() * 255, 10);
+  green = parseInt(Math.random() * 255, 10);
+  blue = parseInt(Math.random() * 255, 10);
   guessColor.innerHTML = `(${red}, ${green}, ${blue})`;
   generateOptionsColor();
   ball1.classList.remove('chosen');
@@ -84,17 +90,4 @@ btnReset.addEventListener('click', () => {
   ball5.classList.remove('chosen');
   ball6.classList.remove('chosen');
   count = 0;
-})
-
-let score = document.querySelector('#score');
-score.innerHTML = 0;
-function addScore() {
-  if (text.innerHTML === 'Acertou!' && count < 1) {
-    score.innerHTML = parseInt(score.innerHTML) + 3;
-  } else if (parseInt(score.innerHTML) > 0 && count < 1){
-    score.innerHTML = parseInt(score.innerHTML) - 1;
-  }
-  count += 1;
-}
-
-console.log();
+});

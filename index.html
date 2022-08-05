@@ -8,23 +8,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1 id="title">Adivinhe a Cor</h1>
-  </header>
-  <p id="rgb-color"></p>
-  <div id="pontuation">    
-  <p id="scoreText">Placar:</p> 
-  <p id="score"></p>
+  <div id="container">
+    <header>
+      <h1 id="title">Adivinhe a Cor</h1>
+    </header>
+    <div id="image-container">
+      <img src="/img/Krita_color_mixing_natural_order.png" alt="">
+    </div>
+    <div id="pontuation">    
+      <p id="scoreText">Placar:</p> 
+      <p id="score"></p>
+    </div>
+    <p id="rgb-color"></p>
+    <div id="colors">
+      <div class="ball" id="first"></div>
+      <div class="ball" id="second"></div>
+      <div class="ball" id="third"></div>
+      <div class="ball" id="fourth"></div>
+      <div class="ball" id="fifth"></div>
+      <div class="ball" id="sixth"></div>
+    </div>
+    <p id="answer"></p>
   </div>
-  <div id="colors">
-    <div class="ball" id="first"></div>
-    <div class="ball" id="second"></div>
-    <div class="ball" id="third"></div>
-    <div class="ball" id="fourth"></div>
-    <div class="ball" id="fifth"></div>
-    <div class="ball" id="sixth"></div>
-  </div>
-  <p id="answer"></p>
   <script src="script.js"></script>
 </body>
 </html>

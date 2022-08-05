@@ -18,3 +18,7 @@ body {
   border: 1px solid black;
   margin-right: 10px;
 }
+
+.chosen {
+  border: 2px solid blue;
+}

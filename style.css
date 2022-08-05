@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#colors {
+  display: flex;
+  flex-direction: row;
+}
+
+.ball {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin-right: 10px;
+}

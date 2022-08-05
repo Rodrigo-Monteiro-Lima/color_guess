@@ -59,6 +59,7 @@ colorsOptions.addEventListener('click', (event) => {
       }       
     }
   }
+  addScore();
   console.log(event.target.style.backgroundColor);
 })
 
@@ -80,3 +81,15 @@ btnReset.addEventListener('click', () => {
   ball5.classList.remove('chosen');
   ball6.classList.remove('chosen');
 })
+
+let score = document.querySelector('#score');
+score.innerHTML = 0;
+function addScore() {
+  if (text.innerHTML === 'Acertou!') {
+    score.innerHTML = parseInt(score.innerHTML) + 3;
+  } else if (parseInt(score.innerHTML) > 0){
+    score.innerHTML = parseInt(score.innerHTML) - 1;
+  }
+}
+
+console.log();

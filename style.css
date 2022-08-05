@@ -11,6 +11,10 @@ body {
   flex-direction: row;
 }
 
+#pontuation {
+  display: flex;
+}
+
 .ball {
   width: 70px;
   height: 70px;
@@ -21,4 +25,8 @@ body {
 
 .chosen {
   border: 2px solid blue;
+}
+
+#score {
+  margin-left: 10px;
 }

@@ -5,9 +5,9 @@ let text = document.querySelector('#answer');
 function generateOptionsColor() {
   for (let index = 0; index < options.length; index += 1) {
     options[index].style.backgroundColor = `rgb(${Math.random()
-      * 255},${Math.random() * 255},${Math.random() * 255})`;
-    
+      * 255},${Math.random() * 255},${Math.random() * 255})`;    
   }
+  options[parseInt(Math.random() * 5)].style.backgroundColor = 'rgb' + guessColor.innerHTML;
 }
 
 //function colorToBeGuessed() {
@@ -48,12 +48,10 @@ window,onload = function initial() {
 }
 
 let colorsOptions = document.querySelector('#colors');
-let guessedValue = 'rgb' + document.querySelector('#rgb-color').innerHTML;
-console.log(guessedValue);
 colorsOptions.addEventListener('click', (event) => {
+  let guessedValue = 'rgb' + document.querySelector('#rgb-color').innerHTML;
   if (event.target.className.includes('ball')) {
     if (event.target.className.includes('chosen')) {
-      console.log(event.target.style.backgroundColor);
       if (guessedValue === event.target.style.backgroundColor) {
         text.innerHTML = 'Acertou!'
       } else if (guessedValue !== event.target.style.backgroundColor) {
@@ -61,6 +59,7 @@ colorsOptions.addEventListener('click', (event) => {
       }       
     }
   }
+  console.log(event.target.style.backgroundColor);
 })
 
 let btnReset = document.createElement('button');
@@ -73,13 +72,11 @@ btnReset.addEventListener('click', () => {
   let green = parseInt(Math.random() * 255);
   let blue = parseInt(Math.random() * 255);
   guessColor.innerHTML = `(${red}, ${green}, ${blue})`;
-  for (let index = 0; index < options.length; index += 1) {
-    options[index].style.backgroundColor = `rgb(${Math.random()
-      * 255},${Math.random() * 255},${Math.random() * 255})`;
-    
-  }
+  generateOptionsColor();
+  ball1.classList.remove('chosen');
+  ball2.classList.remove('chosen');
+  ball3.classList.remove('chosen');
+  ball4.classList.remove('chosen');
+  ball5.classList.remove('chosen');
+  ball6.classList.remove('chosen');
 })
-
-let teste = 'rgb(' + (red * parseInt(Math.random() * 2)) + ', '
-+ (green * parseInt(Math.random() * 2)) + ', ' + (blue * parseInt(Math.random() * 2)) + ')';
-console.log(teste);
